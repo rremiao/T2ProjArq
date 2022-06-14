@@ -1,13 +1,13 @@
-package com.rremiao.produtoservice;
+// package com.rremiao.produtoservice;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ProdutoserviceApplicationTests {
+// @SpringBootTest
+// class ProdutoserviceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
