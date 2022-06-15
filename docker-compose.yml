@@ -11,6 +11,7 @@ services:
       - seller-network
     depends_on:
       - naming-server
+      - api-gateway
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
@@ -24,6 +25,7 @@ services:
       - seller-network
     depends_on:
       - naming-server
+      - api-gateway
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
@@ -37,6 +39,7 @@ services:
       - seller-network
     depends_on:
       - naming-server
+      - api-gateway
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
@@ -71,6 +74,7 @@ services:
       - seller-network
     depends_on:
       - naming-server
+      - api-gateway
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
