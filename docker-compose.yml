@@ -28,6 +28,19 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
+  venda:
+    image: venda
+    mem_limit: 700m
+    ports:
+      - "8003:8003"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
   naming-server:
     image: nameserver
     mem_limit: 700m
