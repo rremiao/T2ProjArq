@@ -1,6 +1,4 @@
-package com.rremiao.integrador.controller;
-
-import java.util.List;
+package com.rremiao.vendaService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,19 +6,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rremiao.integrador.business.dto.VendaDTO;
-import com.rremiao.integrador.integration.MSIntegrator;
+import com.rremiao.vendaService.core.service.VendaService;
 
 @RestController
 @RequestMapping("/historico")
 public class HistoricoController {
-    @Autowired
-    MSIntegrator integrador;
-
-    @GetMapping("/")
-    @CrossOrigin(origins = "*")
-    public List<VendaDTO> vendasEfetuadas() {
-      return integrador.vendasEfetuadas();
-    }
     
+    @Autowired
+    VendaService vendaService;
+
+    @GetMapping("/healthcheck")
+    @CrossOrigin(origins = "*")
+    public boolean healthcheck() {
+      return true;
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rremiao.integrador.business.dto.ParamSubtotal_DTO;
+import com.rremiao.integrador.business.dto.PrecosDTO;
 import com.rremiao.integrador.integration.MSIntegrator;
 
 @RestController
@@ -18,14 +20,14 @@ public class VendaController {
 
     @PostMapping("/confirmacao")
     @CrossOrigin(origins = "*")
-    public void confirmaVenda(@RequestBody final String itens) {
-        
+    public boolean confirmaVenda(@RequestBody final String itens) {
+        return integrador.confirmaVenda(itens);
     }
 
     @PostMapping("/subtotal")
     @CrossOrigin(origins = "*")
-    public void calculaSubtotal(@RequestBody final String param) {
-        
+    public PrecosDTO calculaSubtotal(@RequestBody final ParamSubtotal_DTO param) {
+        return integrador.calculaSubtotal(param);
     }
 
 }
