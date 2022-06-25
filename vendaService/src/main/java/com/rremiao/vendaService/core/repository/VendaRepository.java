@@ -17,21 +17,20 @@ import com.rremiao.vendaService.business.dto.ProdutoDTO;
 import com.rremiao.vendaService.business.dto.VendaDTO;
 import com.rremiao.vendaService.business.entity.Venda;
 import com.rremiao.vendaService.core.operation.VendaOperationRepository;
+import com.rremiao.vendaService.core.service.MSIntegrationService;
 
 @Repository
 public class VendaRepository {
+
     @Autowired
     VendaOperationRepository vendaOperationRepository;
 
-    //@Autowired
-    //ProdutoService produtoService;
-
-    //@Autowired
-    //EnderecoService enderecoService;
+    @Autowired
+    MSIntegrationService integrationService;
 
     public boolean confirmaVenda(final List<ItemCarrinhoDTO> itens) {
 
-        List<ProdutoDTO> listaProdutos = new ArrayList<ProdutoDTO>();//produtoService.listaProdutos();
+        List<ProdutoDTO> listaProdutos = integrationService.listaProdutos();
         ArrayList<Integer> listaQtdades = new ArrayList<>();
 
         List<ProdutoDTO> produtos = new ArrayList<>();
@@ -66,7 +65,7 @@ public class VendaRepository {
         Venda venda = new Venda();
         
         venda = venda.withDesconto(0)
-                     .withImposto(0/*produtoService.calculaImpostoSimples(produtos)*/)
+                     .withImposto(integrationService.calculaImpostoSimples(produtos))
                      .withValorTotal(calculaValorTotal(itens))
                      .withFrete(25)
                      .withEndereco(1)
@@ -80,7 +79,7 @@ public class VendaRepository {
         Integer subtotal = 0;
         Integer imposto = 0;
         PrecosDTO response = new PrecosDTO();
-        List<ProdutoDTO> produtos = new ArrayList<ProdutoDTO>();/*produtoService.listaProdutos();*/
+        List<ProdutoDTO> produtos = integrationService.listaProdutos();
 
         //Verifica se o endereço existe
         if (param.getEndereco() == null ||
@@ -116,7 +115,7 @@ public class VendaRepository {
 
         for(Venda venda : listaDeVendas) {
             VendaDTO vnda = new VendaDTO();
-            EnderecoDTO addr = new EnderecoDTO(); //enderecoService.buscaEndereco(venda.getEndereco());
+            EnderecoDTO addr = integrationService.buscaEndereco(venda.getEndereco());
 
             vnda.withId(venda.getId())
                     .withFrete(venda.getFrete())

@@ -11,12 +11,14 @@ public class ApiGatewayConfiguration {
     @Bean 
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) { 
         return builder.routes() 
-                      .route(p -> p.path("/produto-service/**") 
+                      .route(p -> p.path("/produtos/**") 
                       .uri("lb://produto-service")) 
-                      .route(p -> p.path("/venda/**") 
-                      .uri("lb://venda")) 
-                      .route(p -> p.path("/estoque-service/**") 
+                      .route(p -> p.path("/vendas/**") 
+                      .uri("lb://venda-service")) 
+                      .route(p -> p.path("/estoque/**") 
                       .uri("lb://estoque-service"))
+                      .route(p -> p.path("/historico/**")
+                      .uri("lb://venda-service"))
                       .route(p -> p.path("/integrador/**")
                       .uri("lb://integrador")).build(); 
     } 
