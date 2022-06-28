@@ -4,6 +4,6 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 FROM maven:3.8.3-openjdk-17
-COPY ./target/nameserver-0.0.1-SNAPSHOT.jar . 
-EXPOSE 8761 
-CMD ["java","-jar","nameserver-0.0.1-SNAPSHOT.jar"] 
+COPY ./target/enderecoService-0.0.1-SNAPSHOT.jar . 
+EXPOSE 8004
+CMD ["java","-jar","enderecoService-0.0.1-SNAPSHOT.jar"]
