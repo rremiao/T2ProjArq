@@ -7,7 +7,7 @@ services:
     build:
           context: estoqueService
           dockerfile: Dockerfile
-    mem_limit: 700m
+    
     ports:
       - "8002:8002"
     networks:
@@ -24,7 +24,7 @@ services:
     build:
           context: produtoservice
           dockerfile: Dockerfile
-    mem_limit: 700m
+    
     ports:
       - "8001:8001"
     networks:
@@ -41,7 +41,7 @@ services:
     build:
           context: enderecoService
           dockerfile: Dockerfile
-    mem_limit: 700m
+    
     ports:
       - "8004:8004"
     networks:
@@ -58,7 +58,7 @@ services:
     build:
           context: vendaService
           dockerfile: Dockerfile
-    mem_limit: 700m
+    
     ports:
       - "8003:8003"
     networks:
@@ -75,7 +75,7 @@ services:
     build:
           context: nameserver
           dockerfile: Dockerfile
-    mem_limit: 700m
+    
     ports:
       - "8761:8761"
     networks:
@@ -83,7 +83,7 @@ services:
   
   api-gateway:
     image: gateway
-    mem_limit: 700m
+    
     ports:
       - "8008:8008"
     networks:
@@ -96,7 +96,7 @@ services:
 
   integrador:
     image: integrador
-    mem_limit: 700m
+    
     build:
           context: nameserver
           dockerfile: Dockerfile
