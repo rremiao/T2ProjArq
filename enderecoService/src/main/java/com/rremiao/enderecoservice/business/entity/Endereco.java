@@ -15,7 +15,7 @@ public class Endereco {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "logradouro")
+    @Column(name = "logradouroo")
     private String logradouro;    
 
     @Column(name = "numero")

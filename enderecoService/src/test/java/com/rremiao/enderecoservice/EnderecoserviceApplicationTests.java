@@ -1,13 +1,13 @@
-package com.rremiao.enderecoservice;
+// package com.rremiao.enderecoservice;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EnderecoserviceApplicationTests {
+// @SpringBootTest
+// class EnderecoserviceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }

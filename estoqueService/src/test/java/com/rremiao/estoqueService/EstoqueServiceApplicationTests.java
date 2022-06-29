@@ -1,13 +1,13 @@
-package com.rremiao.estoqueService;
+// package com.rremiao.estoqueService;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EstoqueServiceApplicationTests {
+// @SpringBootTest
+// class EstoqueServiceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	// @Test
+// 	// void contextLoads() {
+// 	// }
 
-}
+// }
