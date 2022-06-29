@@ -1,9 +1,12 @@
 FROM maven:3.8.3-openjdk-17 as build
-COPY src /home/app/src
-COPY pom.xml /pom.xml
-RUN mvn pom.xml clean package
+WORKDIR /app
+COPY pom.xml .
+RUN mvn -e -B dependency:resolve
+COPY src ./src
+RUN mvn clean -e -B package
 
 FROM maven:3.8.3-openjdk-17
-COPY ./target/vendaService-0.0.1-SNAPSHOT.jar . 
-EXPOSE 8003
+WORKDIR /app
+COPY --from=build /app/target/vendaService-0.0.1-SNAPSHOT.jar .
+EXPOSE 8761
 CMD ["java","-jar","vendaService-0.0.1-SNAPSHOT.jar"]
