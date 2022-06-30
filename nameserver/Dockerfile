@@ -1,12 +1,8 @@
 FROM maven:3.8.3-openjdk-17 as build
-WORKDIR /app
-COPY pom.xml .
-RUN mvn -e -B dependency:resolve
-COPY src ./src
-RUN mvn clean -e -B package
-
-FROM maven:3.8.3-openjdk-17
-WORKDIR /app
-COPY --from=build /app/target/nameserver-0.0.1-SNAPSHOT.jar .
+WORKDIR /usr/src/app
+COPY ./pom.xml .
+RUN mvn -B -f ./pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:go-offline
+COPY ./ .
+RUN mvn -B -f ./pom.xml -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 EXPOSE 8761
-CMD ["java","-jar","nameserver-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","./target/nameserver-0.0.1-SNAPSHOT.jar"]
