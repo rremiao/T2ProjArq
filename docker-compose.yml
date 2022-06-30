@@ -4,10 +4,12 @@ services:
 
   estoque:
     image: estoque
+    container_name: estoque
+    restart: always
+    pull_policy: build
     build:
           context: estoqueService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8002:8002"
     networks:
@@ -21,10 +23,12 @@ services:
 
   produto:
     image: produto
+    container_name: produto
+    restart: always
+    pull_policy: build
     build:
           context: produtoservice
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8001:8001"
     networks:
@@ -38,10 +42,12 @@ services:
       
   endereco:
     image: endereco
+    container_name: endereco
+    restart: always
+    pull_policy: build
     build:
           context: enderecoService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8004:8004"
     networks:
@@ -55,10 +61,12 @@ services:
 
   venda:
     image: venda
+    container_name: venda
+    restart: always
+    pull_policy: build
     build:
           context: vendaService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8003:8003"
     networks:
@@ -72,10 +80,11 @@ services:
 
   naming-server:
     image: nameserver
+    container_name: nameserver
+    restart: always
     build:
           context: nameserver
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8761:8761"
     networks:
@@ -83,7 +92,9 @@ services:
   
   api-gateway:
     image: gateway
-    mem_limit: 700m
+    container_name: gateway
+    restart: always
+    pull_policy: build
     ports:
       - "8008:8008"
     networks:
@@ -96,7 +107,8 @@ services:
 
   integrador:
     image: integrador
-    mem_limit: 700m
+    container_name: integrador
+    restart: always
     build:
           context: nameserver
           dockerfile: Dockerfile
@@ -113,11 +125,22 @@ services:
 
   zipkin-server:
     image: openzipkin/zipkin:2.23
-    mem_limit: 300m
+    container_name: zipkin
+    restart: always
     ports:
       - "9411:9411"
     networks:
       - seller-network
+  mysql:
+    image: mysql:5.7
+    container_name: f_mysql
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
 
 networks:
   seller-network:

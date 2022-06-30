@@ -3,7 +3,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn -e -B dependency:resolve
 COPY src ./src
-RUN mvn clean -e -B package
+RUN mvn clean install -Dmaven.test.skip=true
 
 FROM maven:3.8.3-openjdk-17
 WORKDIR /app
