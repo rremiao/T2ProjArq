@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   estoque:
     image: estoque
     build:
@@ -36,22 +35,22 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
       
-  endereco:
-    image: endereco
-    build:
-          context: enderecoService
-          dockerfile: Dockerfile
+  # endereco:
+  #   image: endereco
+  #   build:
+  #         context: enderecoService
+  #         dockerfile: Dockerfile
     
-    ports:
-      - "8004:8004"
-    networks:
-      - seller-network
-    depends_on:
-      - naming-server
-      - api-gateway
-    environment:
-      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+  #   ports:
+  #     - "8004:8004"
+  #   networks:
+  #     - seller-network
+  #   depends_on:
+  #     - naming-server
+  #     - api-gateway
+  #   environment:
+  #     EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+  #     SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
   venda:
     image: venda
