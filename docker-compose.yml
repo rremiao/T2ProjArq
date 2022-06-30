@@ -15,6 +15,7 @@ services:
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -34,6 +35,7 @@ services:
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -53,6 +55,7 @@ services:
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -72,6 +75,7 @@ services:
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
