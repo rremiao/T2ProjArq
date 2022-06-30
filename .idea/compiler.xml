@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="estoqueService" />
+        <module name="apiGateway" />
+        <module name="nameserver" />
+        <module name="produtoservice" />
+        <module name="integrador" />
+        <module name="vendaService" />
+        <module name="enderecoservice" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiGateway" target="11" />
+      <module name="enderecoservice" target="11" />
+      <module name="estoqueService" target="11" />
+      <module name="integrador" target="11" />
+      <module name="nameserver" target="11" />
+      <module name="produtoservice" target="11" />
+      <module name="vendaService" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

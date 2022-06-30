@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/T2ProjArq.iml" filepath="$PROJECT_DIR$/.idea/T2ProjArq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apiGateway/apiGateway.iml" filepath="$PROJECT_DIR$/apiGateway/apiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/enderecoService/enderecoservice.iml" filepath="$PROJECT_DIR$/enderecoService/enderecoservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/estoqueService/estoqueService.iml" filepath="$PROJECT_DIR$/estoqueService/estoqueService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/integrador/integrador.iml" filepath="$PROJECT_DIR$/integrador/integrador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nameserver/nameserver.iml" filepath="$PROJECT_DIR$/nameserver/nameserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/produtoservice/produtoservice.iml" filepath="$PROJECT_DIR$/produtoservice/produtoservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vendaService/vendaService.iml" filepath="$PROJECT_DIR$/vendaService/vendaService.iml" />
+    </modules>
+  </component>
+</project>
