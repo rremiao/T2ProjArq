@@ -1,0 +1,4 @@
+abrir code e rodar as aplicações.
+	1 - nameService
+	2 - gateway
+	Resto é o resto

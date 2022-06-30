@@ -2,6 +2,7 @@ package com.rremiao.vendaService.core.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,14 +64,14 @@ public class VendaRepository {
         }
 
         Venda venda = new Venda();
-        
+
         venda = venda.withDesconto(0)
-                     .withImposto(integrationService.calculaImpostoSimples(produtos))
-                     .withValorTotal(calculaValorTotal(itens))
-                     .withFrete(25)
-                     .withEndereco(1)
-                     .withItemsCarrinhoJson(mapearJson(itens));
-        
+                .withImposto(integrationService.calculaImpostoSimples(produtos))
+                .withValorTotal(calculaValorTotal(itens))
+                .withFrete(25)
+                .withEndereco(1)
+                .withItemsCarrinhoJson(mapearJson(itens));
+
         vendaOperationRepository.save(venda);
         return true;
     }
@@ -81,12 +82,12 @@ public class VendaRepository {
         PrecosDTO response = new PrecosDTO();
         List<ProdutoDTO> produtos = integrationService.listaProdutos();
 
-        //Verifica se o endereço existe
+        // Verifica se o endereço existe
         if (param.getEndereco() == null ||
-            param.getEndereco().isEmpty() ||
-            param.getEndereco().isBlank()) {
-         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Endereco invalido");
-       } 
+                param.getEndereco().isEmpty() ||
+                param.getEndereco().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Endereco invalido");
+        }
 
         for (final ItemCarrinhoDTO it : param.getItens()) {
             // Procurar o produto pelo código
@@ -99,7 +100,7 @@ public class VendaRepository {
                 throw new IllegalArgumentException("Codigo invalido");
             }
         }
-        
+
         double frete = 25.0;
 
         response.withSubtotal(subtotal)
@@ -113,7 +114,7 @@ public class VendaRepository {
         List<Venda> listaDeVendas = vendaOperationRepository.findAll();
         List<VendaDTO> lista = new ArrayList<>();
 
-        for(Venda venda : listaDeVendas) {
+        for (Venda venda : listaDeVendas) {
             VendaDTO vnda = new VendaDTO();
             EnderecoDTO addr = integrationService.buscaEndereco(venda.getEndereco());
 
@@ -124,38 +125,33 @@ public class VendaRepository {
                     .withItemsCarrinho(venda.getItemsCarrinhoJson())
                     .withValorTotal(venda.getValorTotal())
                     .withEndereco(addr);
-            
+
             lista.add(vnda);
         }
 
         return lista;
     }
 
-
     private int calculaValorTotal(List<ItemCarrinhoDTO> itens) {
         int soma = 0;
 
-        for(ItemCarrinhoDTO item : itens) {
-            int desconto = (int)item.getDesconto();
+        for (ItemCarrinhoDTO item : itens) {
+            int desconto = (int) item.getDesconto();
             int imposto = (int) item.getImposto();
             int custo = (int) item.getCusto();
 
             int calculo = (imposto + custo) - desconto;
 
-            soma+= calculo;
+            soma += calculo;
         }
 
         return soma;
     }
-    
+
     private String mapearJson(List<ItemCarrinhoDTO> itens) {
-        String json = "";
         Gson gson = new Gson();
-
-        for(ItemCarrinhoDTO item : itens) {
-            json.concat(gson.toJson(item));
-        }
-
-        return json;
+        return "["
+                + String.join(",", itens.stream().map(i -> gson.toJson(i)).collect(Collectors.toList()))
+                + "]";
     }
 }
