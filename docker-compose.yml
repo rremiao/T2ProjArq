@@ -1,0 +1,123 @@
+version: '3.7'
+
+services:
+
+  estoque:
+    image: estoque
+    build:
+          context: estoqueService
+          dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+      - "8002:8002"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  produto:
+    image: produto
+    build:
+          context: produtoservice
+          dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+      - "8001:8001"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      
+  endereco:
+    image: endereco
+    build:
+          context: enderecoService
+          dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+      - "8004:8004"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  venda:
+    image: venda
+    build:
+          context: vendaService
+          dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+      - "8003:8003"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  naming-server:
+    image: nameserver
+    build:
+          context: nameserver
+          dockerfile: Dockerfile
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - seller-network
+  
+  api-gateway:
+    image: gateway
+    mem_limit: 700m
+    ports:
+      - "8008:8008"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  integrador:
+    image: integrador
+    mem_limit: 700m
+    build:
+          context: nameserver
+          dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - seller-network
+    depends_on:
+      - naming-server
+      - api-gateway
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+
+  zipkin-server:
+    image: openzipkin/zipkin:2.23
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    networks:
+      - seller-network
+
+networks:
+  seller-network:
