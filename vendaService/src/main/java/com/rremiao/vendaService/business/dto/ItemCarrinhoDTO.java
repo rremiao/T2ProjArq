@@ -1,8 +1,6 @@
 package com.rremiao.vendaService.business.dto;
 
-import java.io.Serializable;
-
-public class ItemCarrinhoDTO implements Serializable {
+public class ItemCarrinhoDTO {
     private int codigo;
     private int quantidade;
     private ProdutoDTO produto;
