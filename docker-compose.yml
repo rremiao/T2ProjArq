@@ -136,13 +136,13 @@ services:
     networks:
       - seller-network
   mysql:
-    image: mysql:5.7
+    image: mysql
     container_name: f_mysql
     restart: always
-    volumes:
-      - ./db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+    pull_policy: build
+    build:
+      context: db
+      dockerfile: Dockerfile
     ports:
       - '3306:3306'
 
