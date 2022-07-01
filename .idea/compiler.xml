@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="estoqueService" />
+        <module name="apiGateway" />
+        <module name="nameserver" />
+        <module name="produtoservice" />
+        <module name="integrador" />
+        <module name="vendaService" />
+        <module name="enderecoservice" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiGateway" target="11" />
+      <module name="enderecoservice" target="11" />
+      <module name="estoqueService" target="11" />
+      <module name="integrador" target="11" />
+      <module name="nameserver" target="11" />
+      <module name="produtoservice" target="11" />
+      <module name="vendaService" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="apiGateway" options="-parameters" />
+      <module name="enderecoservice" options="-parameters" />
+      <module name="estoqueService" options="-parameters" />
+      <module name="integrador" options="-parameters" />
+      <module name="nameserver" options="-parameters" />
+      <module name="produtoservice" options="-parameters" />
+      <module name="vendaService" options="-parameters" />
+    </option>
+  </component>
+</project>

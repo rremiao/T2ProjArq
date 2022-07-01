@@ -4,15 +4,20 @@ services:
 
   estoque:
     image: estoque
+    container_name: estoque
+    restart: always
+    pull_policy: build
+    links:
+      - mysql
     build:
           context: estoqueService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8002:8002"
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -21,15 +26,20 @@ services:
 
   produto:
     image: produto
+    links: 
+      - mysql
+    container_name: produto
+    restart: always
+    pull_policy: build
     build:
           context: produtoservice
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8001:8001"
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -38,15 +48,20 @@ services:
       
   endereco:
     image: endereco
+    container_name: endereco
+    restart: always
+    pull_policy: build
     build:
           context: enderecoService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8004:8004"
     networks:
       - seller-network
+    links: 
+      - mysql
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
@@ -55,27 +70,34 @@ services:
 
   venda:
     image: venda
+    container_name: venda
+    restart: always
+    pull_policy: build
+    links: 
+      - mysql
     build:
           context: vendaService
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8003:8003"
     networks:
       - seller-network
     depends_on:
+      - mysql
       - naming-server
       - api-gateway
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING.DATASOURCE.URL: jdbc:mysql://mysql:3306/trabalho1projarq?useUnicode=true&characterEncoding=utf8&useSSL=false
 
   naming-server:
     image: nameserver
+    container_name: nameserver
+    restart: always
     build:
           context: nameserver
           dockerfile: Dockerfile
-    mem_limit: 700m
     ports:
       - "8761:8761"
     networks:
@@ -83,7 +105,9 @@ services:
   
   api-gateway:
     image: gateway
-    mem_limit: 700m
+    container_name: gateway
+    restart: always
+    pull_policy: build
     ports:
       - "8008:8008"
     networks:
@@ -94,14 +118,17 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
+      
+
   integrador:
     image: integrador
-    mem_limit: 700m
+    container_name: integrador
+    restart: always
     build:
-          context: nameserver
+          context: integrador
           dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8010:8010"
     networks:
       - seller-network
     depends_on:
@@ -113,11 +140,27 @@ services:
 
   zipkin-server:
     image: openzipkin/zipkin:2.23
-    mem_limit: 300m
+    container_name: zipkin
+    restart: always
     ports:
       - "9411:9411"
     networks:
       - seller-network
+  mysql:
+    image: mysql
+    container_name: f_mysql
+    restart: always
+    networks:
+      - seller-network
+    pull_policy: build
+    environment:
+      - MY_SQL_ROOT_PASSWORD=root
+    build:
+      context: db
+      dockerfile: Dockerfile
+    ports:
+      - '3306:3306'
+      
 
 networks:
   seller-network:

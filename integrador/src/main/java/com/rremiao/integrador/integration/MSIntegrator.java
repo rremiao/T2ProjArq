@@ -30,7 +30,7 @@ public class MSIntegrator {
     }
 
     public List<ProdutoDTO> listaProdutos() {
-        ResponseEntity<ProdutoDTO[]> forEntity = new RestTemplate().getForEntity("http://localhost:8008/produto-service/", ProdutoDTO[].class);
+        ResponseEntity<ProdutoDTO[]> forEntity = new RestTemplate().getForEntity("http://gateway:8008/produto-service/", ProdutoDTO[].class);
 
         List<ProdutoDTO> listaProdutos = new ArrayList<>();
 
@@ -45,25 +45,25 @@ public class MSIntegrator {
         params.put("codigo", codigo);
         params.put("quantidade", quantidade);
 
-        ResponseEntity<Boolean> forEntity = new RestTemplate().postForEntity("http://localhost:8008/produto-service/autorizacao", params, Boolean.class);
+        ResponseEntity<Boolean> forEntity = new RestTemplate().postForEntity("http://api-gateway:8008/produto-service/autorizacao", params, Boolean.class);
 
         return forEntity.getBody();
     }
 
     public ProdutoDTO buscaProduto(Integer codigo) {
-        ResponseEntity<ProdutoDTO> forEntity = new RestTemplate().exchange("http://localhost:8008/produto-service/buscaProduto", HttpMethod.GET, null,ProdutoDTO.class, codigo);
+        ResponseEntity<ProdutoDTO> forEntity = new RestTemplate().exchange("http://api-gateway:8008/produto-service/buscaProduto", HttpMethod.GET, null,ProdutoDTO.class, codigo);
 
 		return forEntity.getBody();
     }
 
     public boolean confirmaVenda(String itens) {
-        ResponseEntity<Boolean> forEntity = new RestTemplate().postForEntity("http://localhost:8008/venda-service/confirmacao", itens, Boolean.class);
+        ResponseEntity<Boolean> forEntity = new RestTemplate().postForEntity("http://api-gateway:8008/venda-service/confirmacao", itens, Boolean.class);
 
         return forEntity.getBody();
     }
 
     public PrecosDTO calculaSubtotal(ParamSubtotal_DTO param) {
-        ResponseEntity<PrecosDTO> forEntity = new RestTemplate().postForEntity("http://localhost:8008/venda-service/subtotal", param, PrecosDTO.class);
+        ResponseEntity<PrecosDTO> forEntity = new RestTemplate().postForEntity("http://api-gateway:8008/venda-service/subtotal", param, PrecosDTO.class);
 
         return forEntity.getBody();
     }

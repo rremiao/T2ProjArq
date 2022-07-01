@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/apiGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/integrador/pom.xml" />
+        <option value="$PROJECT_DIR$/nameserver/pom.xml" />
+        <option value="$PROJECT_DIR$/vendaService/pom.xml" />
+        <option value="$PROJECT_DIR$/estoqueService/pom.xml" />
+        <option value="$PROJECT_DIR$/produtoservice/pom.xml" />
+        <option value="$PROJECT_DIR$/enderecoService/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+</project>
