@@ -7,6 +7,8 @@ services:
     container_name: estoque
     restart: always
     pull_policy: build
+    links:
+      - mysql
     build:
           context: estoqueService
           dockerfile: Dockerfile
@@ -24,6 +26,8 @@ services:
 
   produto:
     image: produto
+    links: 
+      - mysql
     container_name: produto
     restart: always
     pull_policy: build
@@ -54,6 +58,8 @@ services:
       - "8004:8004"
     networks:
       - seller-network
+    links: 
+      - mysql
     depends_on:
       - mysql
       - naming-server
@@ -67,6 +73,8 @@ services:
     container_name: venda
     restart: always
     pull_policy: build
+    links: 
+      - mysql
     build:
           context: vendaService
           dockerfile: Dockerfile
@@ -81,6 +89,7 @@ services:
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      SPRING.DATASOURCE.URL: jdbc:mysql://mysql:3306/trabalho1projarq?useUnicode=true&characterEncoding=utf8&useSSL=false
 
   naming-server:
     image: nameserver
@@ -109,15 +118,17 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
+      
+
   integrador:
     image: integrador
     container_name: integrador
     restart: always
     build:
-          context: nameserver
+          context: integrador
           dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8010:8010"
     networks:
       - seller-network
     depends_on:
@@ -139,12 +150,17 @@ services:
     image: mysql
     container_name: f_mysql
     restart: always
+    networks:
+      - seller-network
     pull_policy: build
+    environment:
+      - MY_SQL_ROOT_PASSWORD=root
     build:
       context: db
       dockerfile: Dockerfile
     ports:
       - '3306:3306'
+      
 
 networks:
   seller-network:
