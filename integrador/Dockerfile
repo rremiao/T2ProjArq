@@ -8,5 +8,5 @@ RUN mvn clean install -Dmaven.test.skip=true
 FROM maven:3.8.3-openjdk-17
 WORKDIR /app
 COPY --from=build /app/target/integrador-0.0.1-SNAPSHOT.jar .
-EXPOSE 8761
+EXPOSE 8010
 CMD ["java","-jar","integrador-0.0.1-SNAPSHOT.jar"]
