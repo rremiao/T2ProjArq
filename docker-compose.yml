@@ -10,8 +10,8 @@ services:
     links:
       - mysql
     build:
-          context: estoqueService
-          dockerfile: Dockerfile
+      context: estoqueService
+      dockerfile: Dockerfile
     ports:
       - "8002:8002"
     networks:
@@ -26,14 +26,14 @@ services:
 
   produto:
     image: produto
-    links: 
+    links:
       - mysql
     container_name: produto
     restart: always
     pull_policy: build
     build:
-          context: produtoservice
-          dockerfile: Dockerfile
+      context: produtoservice
+      dockerfile: Dockerfile
     ports:
       - "8001:8001"
     networks:
@@ -45,20 +45,20 @@ services:
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
-      
+
   endereco:
     image: endereco
     container_name: endereco
     restart: always
     pull_policy: build
     build:
-          context: enderecoService
-          dockerfile: Dockerfile
+      context: enderecoService
+      dockerfile: Dockerfile
     ports:
       - "8004:8004"
     networks:
       - seller-network
-    links: 
+    links:
       - mysql
     depends_on:
       - mysql
@@ -73,11 +73,11 @@ services:
     container_name: venda
     restart: always
     pull_policy: build
-    links: 
+    links:
       - mysql
     build:
-          context: vendaService
-          dockerfile: Dockerfile
+      context: vendaService
+      dockerfile: Dockerfile
     ports:
       - "8003:8003"
     networks:
@@ -96,13 +96,13 @@ services:
     container_name: nameserver
     restart: always
     build:
-          context: nameserver
-          dockerfile: Dockerfile
+      context: nameserver
+      dockerfile: Dockerfile
     ports:
       - "8761:8761"
     networks:
       - seller-network
-  
+
   api-gateway:
     image: gateway
     container_name: gateway
@@ -118,15 +118,13 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
 
-      
-
   integrador:
     image: integrador
     container_name: integrador
     restart: always
     build:
-          context: integrador
-          dockerfile: Dockerfile
+      context: integrador
+      dockerfile: Dockerfile
     ports:
       - "8010:8010"
     networks:
@@ -147,7 +145,7 @@ services:
     networks:
       - seller-network
   mysql:
-    image: mysql
+    image: mysql:5.7
     container_name: f_mysql
     restart: always
     networks:
@@ -160,7 +158,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - '3306:3306'
-      
 
 networks:
   seller-network:

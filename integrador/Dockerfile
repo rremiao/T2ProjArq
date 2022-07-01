@@ -5,4 +5,4 @@ RUN mvn -B -f ./pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:g
 COPY ./ .
 RUN mvn -B -f ./pom.xml -s /usr/share/maven/ref/settings-docker.xml package -DskipTests -Dmaven.test.skip=true
 EXPOSE 8010
-CMD ["java","-jar","integrador-0.0.1-SNAPSHOT.jar"]
+CMD ["java","-jar","./target/integrador-0.0.1-SNAPSHOT.jar"]
